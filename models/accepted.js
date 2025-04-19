@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const notificationsSchema = new mongoose.Schema({
+const acceptedSchema = new mongoose.Schema({
     participant: {
         type: String,
         required: true,
@@ -9,6 +9,10 @@ const notificationsSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    qrcode: {
+        type: String,
+        required: true,
+    },
 });
 
-module.exports = mongoose.model('notifications', notificationsSchema);
+module.exports = mongoose.model('accepted', acceptedSchema);
