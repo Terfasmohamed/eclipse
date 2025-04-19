@@ -1,15 +1,25 @@
-
-const express  = require('express');
-const app = express() ;
-const port = 3000;
+const express = require('express');
 const mongoose = require('mongoose');
+const app = express();
 
+// Middleware
+app.use(express.json());
 
-app.use (express.json());
-mongoose.connect('mongodb://localhost:27017/mydb')
-  .then(() => console.log("Connected to DB!"))
-  .catch(err => console.log("DB connection failed :(", err));
+// Replace with your actual connection string
+const uri = 'mongodb+srv://eclipse:eclipse@cluster0.ojrzavk.mongodb.net/';
 
-app.listen(port, () => {
-  console.log(`Server is listening on http://localhost:${port}`);
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('✅ Connected to MongoDB Atlas'))
+.catch(err => console.error('❌ MongoDB connection error:', err));
+
+// Example route
+app.get('/', (req, res) => {
+  res.send('Hello from Express + MongoDB Atlas!');
+});
+
+app.listen(3000, () => {
+  console.log('🚀 Server running on http://localhost:3000');
 });
